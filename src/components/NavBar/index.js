@@ -15,42 +15,42 @@ export default function NavBar(props) {
   };
 
   return (
-    <nav className='navbar'>
+    <nav className={`navbar ${props.compact ? 'compact' : null}`} >
 
-      <div className='start'>
-        <img onClick={() => history.push('/')} className='item-menu logo' src={logo} alt="Anime Flix"/>
+    < div className='start'>
+      <img onClick={() => history.push('/')} className='item-menu logo' src={logo} alt="Anime Flix"/>
 
-        <div onClick={() => history.push('/')} className='item-menu'>
-          <span>Home</span>
-        </div>
+      <div onClick={() => history.push('/')} className='item-menu'>
+      <span>Home</span>
+      </div>
 
-        <div onClick={() => history.push('/category')} className='item-menu'>
-          <span>Categorias</span>
-        </div>
+      <div onClick={() => history.push('/category')} className='item-menu'>
+      <span>Categorias</span>
+      </div>
 
-        <div onClick={() => history.push('/category')} className='item-menu'>
-          <span>Minha Lista</span>
-        </div>
+      <div onClick={() => history.push('/category')} className='item-menu'>
+      <span>Minha Lista</span>
+      </div>
       </div>
 
       <div className='end'>
-        <div onClick={() => history.push('/search')} className='item-menu '>
-          <FiSearch/>
-        </div>
-
-        <div className='item-menu'>
-          <span>Lucas Juníor {props.usuario && props.usuario.nome}</span>
-        </div>
-
-        <div onClick={() => history.push('/notification')} className='item-menu'>
-          <FiBell/>
-        </div>
-
-        <div onClick={logout} className='item-menu'>
-          <FiLogOut/>
-          <span>Sair</span>
-        </div>
+      <div onClick={() => history.push('/search')} className='item-menu '>
+      <FiSearch/>
       </div>
-    </nav>
-  )
-}
+
+      <div className='item-menu'>
+      <span>{props.usuario && props.usuario.nome}</span>
+      </div>
+
+      <div onClick={() => history.push('/notification')} className='item-menu'>
+      <FiBell/>
+      </div>
+
+      <div onClick={logout} className='item-menu'>
+      <FiLogOut/>
+      <span>Sair</span>
+      </div>
+      </div>
+      </nav>
+      )
+      }

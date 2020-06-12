@@ -176,8 +176,6 @@
         }
       }
     }
-
-
   }
 }
 
@@ -187,6 +185,11 @@
   background: #111111;
   width: 100%;
 
+  .player {
+    position: relative;
+    height: 100vh;
+    z-index: 111111;
+  }
 
   .episodes {
     display: flex;

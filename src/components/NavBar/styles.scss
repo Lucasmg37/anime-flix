@@ -1,3 +1,8 @@
+.compact {
+  background: rgba(0, 0, 0, 0.96) !important;
+  padding: 10px 20px !important;
+}
+
 .navbar {
   width: 100%;
   padding: 30px 20px;
@@ -5,10 +10,12 @@
   display: flex;
   align-items: center;
   font-size: 20px;
+  font-weight: bold;
   justify-content: space-around;
   border-bottom: .5px rgba(255,255,255, .3) solid;
   color: #d26e29;
   z-index: 100000;
+  transition: all ease-in-out .2s;
 
   .logo {
     height: 60px;

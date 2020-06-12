@@ -238,9 +238,7 @@ export default function Description(props) {
       <div className='bodyDescription'>
 
         {links.length > 0 && (
-          <div style={{
-            height: '100vh'
-          }}>
+          <div className='player'>
             <ReactNetflixPlayer
               title={anime.nome}
               subTitle={episode.nome}

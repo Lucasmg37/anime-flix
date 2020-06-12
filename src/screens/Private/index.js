@@ -14,16 +14,28 @@ import NavBar from "../../components/NavBar";
 export default function Private(props) {
 
   const [usuario, setUsuario] = useState({});
+  const [menuTopScroll, setMenuTopScroll] = useState(false);
 
   useEffect(() => {
+    window.addEventListener('scroll', scrollAction)
+
     Api.UserService.getUser().then(resonse => {
       setUsuario(resonse.data);
     })
   }, []);
 
+  const scrollAction = () => {
+    if (window.pageYOffset > window.innerHeight - 100 && !menuTopScroll) {
+      setMenuTopScroll(true);
+      return;
+    }
+
+    setMenuTopScroll(false);
+  }
+
   return (
     <div className='wrapper'>
-      <NavBar back={true} {...props} />
+      <NavBar usuario={usuario} compact={menuTopScroll} {...props} />
       <div className='pageArea'>
         <Switch>
           <Route path="/info/:anime" exact render={({match}) => (
