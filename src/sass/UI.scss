@@ -1,0 +1,84 @@
+.UIinputText {
+  width: 100%;
+  background: #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px auto;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: all .2s ease-in-out;
+  color: #222222;
+
+  &:focus {
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+  }
+}
+
+.UIinputTextSelect {
+  position: relative;
+
+  input {
+    width: 100%;
+    background: #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px auto;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all .2s ease-in-out;
+    color: #222222;
+
+    &:focus {
+      box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    }
+  }
+
+  ul {
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 1001;
+    background: #eeeeee;
+    border-radius: 8px;
+
+    li {
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        background: #dddddd;
+        font-weight: bold;
+      }
+
+    }
+
+  }
+
+}
+
+.UIbutton{
+  width: 100%;
+  background: #f78b28;;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px auto;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: all .2s ease-in-out;
+  color: #222222;
+  cursor: pointer;
+
+  &:hover {
+    background: #d26e29;
+  }
+
+  &:focus {
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+  }
+
+}

@@ -1,0 +1,18 @@
+import ApiService from "./ApiService";
+
+export default class EpisodeService {
+
+  static getEpisodes(anime) {
+    return ApiService.get("Episode", {
+      params: {
+        anime
+      }
+    })
+  }
+
+  static getNew() {
+    return ApiService.get("Episode/new")
+  }
+
+
+}

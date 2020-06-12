@@ -1,0 +1,136 @@
+.arrow {
+  height: 100%;
+  color: white;
+  position: absolute;
+  z-index: 10002;
+  font-size: 2em;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-items: center;
+  transition: background-color .2s ease-in-out;
+  width: 100px;
+
+  svg {
+    transition: all .2s ease-in-out;
+  }
+
+}
+
+.arrow-left {
+  left: 0;
+  background: linear-gradient(90deg, rgba(22, 20, 19, 0.7539390756302521) 0%, rgba(22, 20, 19, 0) 100%);
+
+  &:hover {
+    svg {
+      transform: translateX(-10px);
+    }
+  }
+}
+
+.arrow-right {
+  right: 0;
+  background: linear-gradient(270deg, rgba(22, 20, 19, 0.7539390756302521) 0%, rgba(22, 20, 19, 0) 100%);
+
+  &:hover {
+    svg {
+      transform: translateX(10px);
+    }
+  }
+}
+
+.carrosel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.gridCarrossel {
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  transition: all ease-in-out .5s;
+}
+
+.itemAnime {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: #ffffff;
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  //flex-basis: 9%;
+  max-width: 250px;
+  flex-basis: 250px;
+  margin: auto 20px;
+
+  &:hover {
+    .imageAnime img {
+      transform: scale(1.05);
+    }
+  }
+
+  .imageAnime {
+    height: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: all ease-out .2s;
+    }
+  }
+
+  .infoAnime {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+    margin-top: 20px;
+
+    .titleAnime {
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .moreInformation {
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+
+      span {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+
+        svg {
+          margin-right: 5px;
+        }
+
+      }
+
+      .year {
+        opacity: .5;
+      }
+
+      .myList {
+        margin: auto 3px auto auto;
+        color: #d26e29;
+      }
+
+      .stars {
+        color: #ffb000;
+      }
+
+    }
+
+  }
+
+}

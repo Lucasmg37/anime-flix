@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', 'Segoe UI', 'Ubuntu', sans-serif;
+  text-decoration: none;
+  outline: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+#root, html, body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+button, input, textarea {
+  font-family: 'Lato', 'Segoe UI', 'Ubuntu', sans-serif;
+  border: none;
+  background: none;
+}
+
+.scroll-clean::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+
+.scroll-clean::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-clean::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 5px;
+}
+
+.wrapper {
+  background: #222222;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ml-10 {
+  margin-left: 10px !important;
+}
+
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.buttonSmallIcon{
+  background: #f78b28;;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1em;
+  transition: all .2s ease-in-out;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+
+  &:hover {
+    background: #d26e29;
+  }
+
+  &:focus {
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+  }
+
+}

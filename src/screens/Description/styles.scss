@@ -1,0 +1,284 @@
+.bannerMedia {
+  position: fixed;
+  z-index: 0;
+  height: 70%;
+  width: 100%;
+
+  .img {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: -2;
+    background: #222222;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+
+  .fosco {
+    height: 70%;
+    width: 100%;
+    z-index: -1;
+    background: rgba(0, 0, 0, .9);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .content {
+    height: 70%;
+    width: 100%;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    color: #ffffff;
+
+    .info {
+      margin: auto auto auto 10%;
+      width: 80%;
+
+      .newEpisodes {
+        display: inline-flex;
+        align-items: center;
+        font-size: 25px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        background: #d26e29;
+        padding: 10px;
+        border-radius: 3px;
+        font-weight: bold;
+
+        opacity: 0;
+        animation: rightToLeftOpacity linear .5s forwards;
+        position: relative;
+        animation-delay: .3s;
+
+        svg {
+          margin-right: 5px;
+        }
+
+      }
+
+      .title {
+        font-size: 5rem;
+        font-weight: bold;
+        margin: 10px auto;
+        //white-space: nowrap;
+        //overflow: hidden;
+        text-overflow: ellipsis;
+        animation: rightToLeftOpacity ease-out 1s;
+        position: relative;
+      }
+
+      .infotop {
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        opacity: 0;
+        animation: rightToLeftOpacity linear .5s forwards;
+        position: relative;
+        animation-delay: .3s;
+
+        span {
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
+
+          svg {
+            margin-right: 5px;
+            color: #ffb000;
+          }
+
+          .destaque {
+            color: #d26e29;
+            margin: auto 5px;
+            font-weight: bold;
+          }
+
+        }
+
+        .star {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+      }
+
+      .description {
+        width: 100%;
+        line-height: 40px;
+        opacity: 0;
+        animation: rightToLeftOpacity linear .5s forwards;
+        position: relative;
+        animation-delay: .3s;
+      }
+
+      .categoriaList {
+        display: flex;
+        animation: rightToLeftOpacity linear .5s forwards;
+        position: relative;
+        animation-delay: .3s;
+        margin-top: 10px;
+
+        li {
+          padding: 5px;
+          cursor: pointer;
+          background: rgba(34, 34, 34, 0.24);
+          border-radius: 3px;
+          margin-right: 5px;
+        }
+
+      }
+
+      .buttonsBanner {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+
+        button {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          font-size: 23px;
+          font-weight: normal;
+          color: #fff;
+          margin-right: 20px;
+          padding: 12px 20px;
+          border-radius: 30px;
+          transition: all linear .2s;
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: rgba(210, 110, 41, 0.33) 0 0 10px 5px;
+          }
+
+          svg {
+            margin-right: 20px;
+          }
+
+          &:nth-child(1) {
+            background: #d26e29;
+          }
+
+          &:nth-child(2) {
+            background: #111111;
+          }
+
+        }
+      }
+    }
+
+
+  }
+}
+
+.bodyDescription {
+  position: absolute;
+  top: 70%;
+  background: #111111;
+  width: 100%;
+
+
+  .episodes {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+    .listEpisodes {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 20px 0;
+
+      ul {
+        display: flex;
+
+        li {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          position: relative;
+          flex-grow: 0;
+          flex-shrink: 0;
+          max-width: 350px;
+          flex-basis: 350px;
+          height: 250px;
+          background: #222222;
+          margin: auto 20px;
+          text-align: center;
+          transition: all ease-in-out .2s;
+          border-radius: 5px;
+          overflow: hidden;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          .content {
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 25px;
+            background: rgba(34, 34, 34, 0.9);
+            transition: all ease-in-out .2s;
+          }
+
+          .imagem {
+            width: 100%;
+            height: 100%;
+
+            img {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+            }
+
+          }
+
+        }
+
+        .episodeSelected {
+          .content {
+            background: rgba(210, 110, 41, 0.91);
+          }
+
+        }
+
+      }
+    }
+
+    .headerSession {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 25px;
+      padding: 30px;
+
+      svg {
+        color: #d26e29;
+        font-size: 30px;
+        margin: auto 20px;
+      }
+    }
+  }
+
+}
+

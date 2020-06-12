@@ -1,15 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1940" />
-    <option name="height" value="1060" />
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ae83939a-fb0a-4cf8-9dff-f7def6e55b76" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils/Time.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Carrossel/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Carrossel/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavBar/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavBar/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/PlayerComponent/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/PlayerComponent/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UIbutton/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UIinputText/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UIinputTextSelect/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/config.example.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sass/Global.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sass/UI.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Category/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Category/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Description/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Description/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Home/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Home/index2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Home/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Login/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Login/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Private/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Private/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Search/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/Search/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/SignUp/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/SignUp/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/AnimeService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/Api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/ApiService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/CategoriaService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/EpisodeService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/LinkService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/LoginService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/SignUpService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/UserService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Sass File" />
+        <option value="SCSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="1apJXgc35SHLyAn7jekjwxAtx7j" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ignore.virus.scanning.warn.message" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/config" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\Desktop\Projetos\animelist\src\config" />
+      <recent name="C:\Users\lucas\Desktop\Projetos\animelist\src\screens\Home" />
+      <recent name="C:\Users\lucas\Desktop\animelist\src\components\PlayerComponent" />
+      <recent name="C:\Users\lucas\Desktop\animelist\src\screens" />
+      <recent name="C:\Users\lucas\Desktop\animelist\src\components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\Desktop\animelist\src\services" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ae83939a-fb0a-4cf8-9dff-f7def6e55b76" name="Default Changelist" comment="" />
+      <created>1585609102401</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585609102401</updated>
+      <workItem from="1585609104463" duration="33964000" />
+      <workItem from="1585829737791" duration="893000" />
+      <workItem from="1585838933447" duration="5104000" />
+      <workItem from="1585865987178" duration="9200000" />
+      <workItem from="1585947793142" duration="2879000" />
+      <workItem from="1585950733454" duration="24633000" />
+      <workItem from="1586100024996" duration="24985000" />
+      <workItem from="1586214052545" duration="12706000" />
+      <workItem from="1586389824609" duration="21609000" />
+      <workItem from="1586629060931" duration="61531000" />
+      <workItem from="1587149952582" duration="26732000" />
+      <workItem from="1587426672272" duration="5777000" />
+      <workItem from="1587508073034" duration="2807000" />
+      <workItem from="1587593148744" duration="37709000" />
+      <workItem from="1588019751592" duration="8370000" />
+      <workItem from="1588107122229" duration="3751000" />
+      <workItem from="1588718673304" duration="1340000" />
+      <workItem from="1588896097112" duration="208000" />
+      <workItem from="1589421907679" duration="12000" />
+      <workItem from="1589981157218" duration="1437000" />
+      <workItem from="1590331736877" duration="247000" />
+      <workItem from="1590678170636" duration="1229000" />
+      <workItem from="1591561726747" duration="3577000" />
+      <workItem from="1591839025257" duration="25544000" />
+      <workItem from="1591926146222" duration="7894000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="172" key="FileChooserDialogImpl" timestamp="1588161567312">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834/1920.130.1366.738@0.0.1536.834" timestamp="1588161567312" />
+    <state x="277" y="62" key="SettingsEditor" timestamp="1587426755340">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="277" y="62" key="SettingsEditor/0.0.1536.834/1920.130.1366.738@0.0.1536.834" timestamp="1587426755340" />
+    <state x="598" y="24" width="724" height="1001" key="find.popup" timestamp="1591883577895">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="478" y="19" width="579" height="795" key="find.popup/0.0.1536.834/1920.130.1366.738@0.0.1536.834" timestamp="1589421915140" />
+    <state x="598" y="24" width="724" height="1001" key="find.popup/1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1591883577895" />
+    <state x="478" y="19" width="579" height="795" key="find.popup/1920.7.1536.834/0.0.1536.834@0.0.1536.834" timestamp="1591561775946" />
+    <state x="616" y="243" key="run.anything.popup" timestamp="1591904875484">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="616" y="243" key="run.anything.popup/1920.0.1536.840/0.0.1920.1050@0.0.1920.1050" timestamp="1591904875484" />
   </component>
 </project>
