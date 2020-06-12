@@ -1,6 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import {FiUser, FiLogOut, FiSearch, FiHome, FiArrowLeft, FiList, FiBell} from 'react-icons/fi';
+import logo from '../../assets/images/animeflix.svg';
 
 import './styles.scss'
 
@@ -17,12 +18,10 @@ export default function NavBar(props) {
     <nav className='navbar'>
 
       <div className='start'>
-        <div onClick={() => history.push('/')} className='item-menu logo'>
-          Anime List
-        </div>
+        <img onClick={() => history.push('/')} className='item-menu logo' src={logo} alt="Anime Flix"/>
 
-        <div onClick={() => history.push('/category')} className='item-menu'>
-          <span>Animes</span>
+        <div onClick={() => history.push('/')} className='item-menu'>
+          <span>Home</span>
         </div>
 
         <div onClick={() => history.push('/category')} className='item-menu'>

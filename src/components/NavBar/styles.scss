@@ -8,11 +8,11 @@
   justify-content: space-around;
   border-bottom: .5px rgba(255,255,255, .3) solid;
   color: #d26e29;
-  //background: #222222;
   z-index: 100000;
 
   .logo {
-    margin-right: 30px  !important;
+    height: 60px;
+    margin: auto;
   }
 
   .start, .end {
@@ -27,7 +27,7 @@
     margin: auto 5px;
     cursor: pointer;
     transition: all .2s ease-in-out;
-
+    white-space: nowrap;
 
     &:hover {
       //font-weight: bold;
