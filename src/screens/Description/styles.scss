@@ -235,11 +235,19 @@
             align-items: center;
             justify-content: center;
             display: flex;
+            flex-direction: column;
             color: #ffffff;
             font-weight: bold;
             font-size: 25px;
             background: rgba(34, 34, 34, 0.9);
             transition: all ease-in-out .2s;
+
+            p {
+              font-size: 15px;
+              font-weight: normal;
+              margin-top: 10px;
+            }
+
           }
 
           .imagem {

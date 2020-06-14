@@ -1,0 +1,54 @@
+.arrowCarroselComponent {
+  height: 100%;
+  color: white;
+  position: absolute;
+  z-index: 10002;
+  font-size: 2em;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-items: center;
+  transition: background-color .2s ease-in-out;
+  width: 100px;
+
+  svg {
+    transition: all .2s ease-in-out;
+    margin: auto;
+  }
+
+}
+
+.arrowCarroselComponentLeft {
+  left: 0;
+  background: linear-gradient(90deg, rgba(22, 20, 19, .8) 20%, rgba(22, 20, 19, 0) 100%);
+  &:hover {
+    svg {
+      transform: translateX(-10px);
+    }
+  }
+}
+
+.arrowCarroselComponentRight {
+  right: 0;
+  background: linear-gradient(270deg, rgba(22, 20, 19, .8) 20%, rgba(22, 20, 19, 0) 100%);
+  &:hover {
+    svg {
+      transform: translateX(10px);
+    }
+  }
+}
+
+.carroselComponent {
+  min-width: 100%;
+  display: flex;
+  position: relative;
+  transition: all ease-in-out .5s;
+}
+
+.gridCarrossel {
+  min-width: 100%;
+  position: relative;
+  display: flex;
+  transition: all ease-in-out .5s;
+}

@@ -14,5 +14,8 @@ export default class EpisodeService {
     return ApiService.get("Episode/new")
   }
 
+  static saveAccessEpisode(id) {
+    return ApiService.post("Episode/saveAccessEpisode/" + id)
+  }
 
 }

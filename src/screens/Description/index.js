@@ -6,17 +6,17 @@ import {FiPlay, FiArrowLeft, FiLink, FiZapOff, FiFolderPlus, FiList} from 'react
 import NavBar from "../../components/NavBar";
 import PlayerComponent from "../../components/PlayerComponent";
 import {FaPlay, FaPlus, FaStar, FiTag} from "react-icons/all";
+import CarrosselComponent from "../../components/CarrosselComponent";
+import EpisodeService from "../../services/EpisodeService";
 
-export default function Description(props) {
+export default function Description({match, history}) {
 
-  const [episodes, setEpisodes] = useState([]);
   const [episode, setEpisode] = useState({});
   const [anime, setAnime] = useState({});
-  const [links, setLinks] = useState([]);
   const [playing, setPlaying] = useState({});
-  const [nextEpisode, setNextEpisode] = useState({});
 
-  const {match, history} = props;
+  const [nextEpisode, setNextEpisode] = useState({});
+  const [lastEpisode, setLastEpisode] = useState({});
 
   const episodesList = useRef(null);
   const timerRef = useRef(null);
@@ -26,39 +26,57 @@ export default function Description(props) {
   }
 
   const timeUpdate = e => {
-    localStorage.setItem("linkcurrent" + playing.id, e.target.currentTime);
-
     if (e.target.currentTime % 20 >= 0 && e.target.currentTime % 20 < 1) {
       let data = e.target.currentTime;
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => savePositionLink(playing.id, data), 5000);
-
     }
   };
 
-  const toNextVideo = () => {
-    let indice = null;
-    episodes.forEach((episode, index) => {
-      if (+episode.id === +match.params.episode) {
-        indice = index;
-      }
-    }, indice, match.params.episode);
+  const playAnime = () => {
 
-    if (indice !== null && episodes[indice + 1]) {
-      history.push('/info/' + anime.id + '/' + episodes[indice + 1].id);
+    if (episode.id) {
+      history.push("/info/" + anime.id + "/" + episode.id);
       return;
     }
 
+    if (anime.atualEpisode && anime.atualEpisode.id_episode) {
+      history.push("/info/" + anime.id + "/" + anime.atualEpisode.id_episode);
+      return;
+    }
+
+    history.push("/info/" + anime.id + "/" + anime.episodes[0].id);
+
+  }
+
+  const exitPlayer = () => {
+    setPlaying({});
+    history.push('/info/' + anime.id)
+  }
+
+  const toNextVideo = () => {
+    let indice = null;
+    anime.episodes.forEach((episode, index) => {
+      if (+episode.id === +match.params.episode) {
+        indice = index;
+      }
+    }, indice, match.params.episode);
+
+    if (indice !== null && anime.episodes[indice + 1]) {
+      history.push('/info/' + anime.id + '/' + anime.episodes[indice + 1].id);
+      return;
+    }
     history.push('/info/' + anime.id);
   };
 
-  const getDataNextVideo = () => {
+  // Busca os dados do próximo episódio
+  const getDataNextVideo = (episodes) => {
     let indice = null;
     episodes.forEach((episode, index) => {
       if (+episode.id === +match.params.episode) {
         indice = index;
       }
-    }, indice, match.params.episode);
+    });
 
     if (indice !== null && episodes[indice + 1]) {
       setNextEpisode(episodes[indice + 1])
@@ -68,137 +86,159 @@ export default function Description(props) {
     setNextEpisode({})
   }
 
-  const scrollToSelected = () => {
-    let element = episodesList.current;
-    let selected = element.getElementsByClassName('episode-selected')[0];
+  const getAnime = async () => {
+    let response = await Api.AnimeService.getAnime(match.params.anime);
 
-    if (selected) {
-      let position = selected.offsetTop;
-      let height = selected.offsetHeight;
-      element.scrollTop = position - (height * 5);
-    }
-  };
-
-
-  useEffect(() => {
-    if (episodes) {
-      scrollToSelected();
-      getDataNextVideo();
-    }
-  }, [episodes])
-
-
-  useEffect(() => {
-    if (match.params.anime) {
-      Api.AnimeService.getAnime(match.params.anime).then(response => {
-
-        response.data.episodes.map(episode => {
-          episode.playing = +match.params.episode === +episode.id;
-
-          if (!episode.playing) {
-            episode.playing = +localStorage.getItem("episodecurrent" + match.params.anime) === +episode.id;
-          }
-
-          // episode.nome = episode.nome.toUpperCase().replace(anime.nome.toUpperCase() + ' - ', '');
-          // episode.nome = episode.nome.toUpperCase().replace(anime.nome.toUpperCase(), '');
-          return episode;
-        }, match.params.episode);
-
-        setAnime(response.data);
+    // Marca o episódio que o user parou
+    if (response.data.atualEpisode) {
+      response.data.episodes.map(episode => {
+        episode.playing = +response.data.atualEpisode.id_episode === +episode.id;
+        return episode;
       });
     }
-  }, [match.params.anime]);
 
-  useEffect(() => {
-    if (anime.id) {
-      Api.EpisodeService.getEpisodes(match.params.anime).then(response => {
+    // Procura a posição para localizar no carrossel
+    let indiceLastViewed = 0;
+    response.data.episodes.forEach((episode, indice) => {
+      if (episode.playing) {
+        indiceLastViewed = indice + 1;
+      }
+    });
 
-        return;
+    let pageEpisodeAtual;
+    let sizeScreen = window.innerWidth;
+    let sizeElement = 350 + 40;
+    let elementsPerPage = Math.ceil(sizeScreen / sizeElement < 2 ? 1 : sizeScreen / sizeElement);
 
-        let replace = response.data.map(episode => {
-          episode.playing = +match.params.episode === +episode.id;
-
-          if (!episode.playing) {
-            episode.playing = +localStorage.getItem("episodecurrent" + match.params.anime) === +episode.id;
-          }
-
-          // episode.nome = episode.nome.toUpperCase().replace(anime.nome.toUpperCase() + ' - ', '');
-          // episode.nome = episode.nome.toUpperCase().replace(anime.nome.toUpperCase(), '');
-          return episode;
-        }, match.params.episode);
-        setEpisodes(replace);
-
-        if (match.params.episode) {
-          let episodeFilter = replace.filter(episode => {
-            return +episode.id === +match.params.episode
-          }, match.params.episode);
-
-          setEpisode(episodeFilter[0]);
-        }
-      });
-
+    if (elementsPerPage >= indiceLastViewed) {
+      pageEpisodeAtual = 0;
+    } else {
+      pageEpisodeAtual = Math.ceil(indiceLastViewed * sizeElement / sizeScreen) + 1;
     }
-  }, [anime, match.params.episode]);
 
-  useEffect(() => {
+    // Salva os dados do último anime vizualizado
+    setLastEpisode({
+      ...response.data.atualEpisode,
+      indiceLastViewed,
+      pageEpisodeAtual
+    });
 
+    setAnime(response.data);
+    return response.data;
+  }
+
+  const changeLink = async (id, episode) => {
+
+    // Set Link em execução
+    setEpisode({
+      ...episode,
+      links: episode.links.map(item => {
+        item.playing = +item.id === +id;
+        return item;
+      })
+    });
+
+    let link = episode.links.filter(item => {
+      return +item.id === +id;
+    })[0];
+
+    setPlaying(link);
+  }
+
+  const priorizaLinks = (anime) => {
+    // Pegar o episodio
+    let episodeChange = anime.episodes.filter(episode => {
+      return +episode.id === +match.params.episode;
+    })[0];
+
+    let links = episodeChange.links
+    let bestLink = null;
+
+    //Prioriza Links HD
+    links.forEach(link => {
+      if (link.nome.indexOf('HD') > -1) {
+        bestLink = link;
+      }
+    }, bestLink);
+
+    if (bestLink !== null) {
+      changeLink(bestLink.id, episodeChange)
+    } else {
+      //Se não tiver HD, usar o primeiro vídeo
+      if (anime.episodes.length > 0) {
+        changeLink(episodeChange.links[0].id, episodeChange)
+      }
+    }
+
+  }
+
+  const changeEpisode = async (animeSend) => {
+
+    if (!animeSend) {
+      animeSend = anime;
+    }
+
+    // Setar o episódio no objeto
+    let episodeChange = animeSend.episodes.filter(episode => {
+      return +episode.id === +match.params.episode;
+    })[0];
+
+    EpisodeService.saveAccessEpisode(match.params.episode);
+
+    getDataNextVideo(animeSend.episodes);
+    setEpisode(episodeChange);
+
+    // Selecionar o episódio como atual
+    setAnime({
+      ...animeSend, episodes: animeSend.episodes.map(episode => {
+        episode.playing = +match.params.episode === +episode.id;
+        return episode;
+      })
+    });
+
+    let atualEpisode = animeSend.episodes.filter(episode => {
+      return +match.params.episode === +episode.id;
+    })[0];
+
+    setLastEpisode({
+      ...lastEpisode,
+      ...atualEpisode
+    });
+
+    // Ao trocar de episódio, abrir o link padrão se não estiver satado na rota o link específico
+    if (!match.params.link) {
+      priorizaLinks(animeSend);
+    }
+
+    return episodeChange;
+  }
+
+  const init = async () => {
+    let animeSend = null;
+    let episodeSend = null;
+
+    // Se alterar o Anime
+    if (match.params.anime && +anime.id !== +match.params.anime) {
+      animeSend = await getAnime();
+    }
+
+    // Se alterar o anime
     if (match.params.episode) {
-      //Defini o episódoio do usuário
-      localStorage.setItem("episodecurrent" + match.params.anime, match.params.episode);
-
-      Api.LinkService.getLinks(match.params.episode).then(response => {
-        let bestLink = null;
-
-        if (match.params.link) {
-          response.data = response.data.map(item => {
-            item.playing = +item.id === +match.params.link;
-            return item;
-          }, match.params.link);
-
-          let linkPlaying = response.data.filter(link => {
-            return +link.id === +match.params.link;
-          }, match.params.link);
-          bestLink = linkPlaying[0];
-          setPlaying(linkPlaying[0]);
-        } else {
-
-          //Prioriza Links HD
-          response.data.forEach(link => {
-            if (link.nome.indexOf('HD') > -1) {
-              bestLink = link;
-              return;
-            }
-          }, bestLink);
-
-          if (bestLink !== null) {
-            response.data = response.data.map(item => {
-              item.playing = +item.id === +bestLink.id;
-              return item;
-            }, bestLink);
-
-            setPlaying(bestLink);
-          } else {
-            //Se não tiver HD, usar o primeiro vídeo
-            if (response.data.length > 0) {
-              response.data[0].playing = true;
-              bestLink = response.data[0];
-              setPlaying(bestLink);
-            }
-          }
-        }
-        setLinks(response.data);
-
-        if (bestLink) {
-          //Busca posição do video se o usuário já tiver visto
-          let currentVideo = localStorage.getItem("linkcurrent" + bestLink.id) ? localStorage.getItem("linkcurrent" + bestLink.id) : 0;
-          // let currentVideo = localStorage.getItem("linkcurrent" + episode.id) ? localStorage.getItem("linkcurrent" + episode.id) : 0;
-          let videoElement = document.getElementById("player-episode");
-          // videoElement.currentTime = currentVideo >= 5 ? currentVideo - 5 : 0;
-        }
-
-      });
+      episodeSend = await changeEpisode(animeSend);
     }
-  }, [match.params.episode, match.params.link]);
+
+    // Se alterar o link
+    if (match.params.link && +playing.id !== +match.params.link) {
+      await changeLink(match.params.link, episodeSend ? episodeSend : episode);
+    }
+
+  }
+
+// Verifica alterações de rota
+  useEffect(() => {
+    init();
+  }, [match.params.anime, match.params.episode, match.params.link]);
+
 
   return (
     <div className=''>
@@ -226,7 +266,9 @@ export default function Description(props) {
                 {anime.description}
               </div>
               <div className='buttonsBanner'>
-                <button><FaPlay/>{anime.atualEpisode && anime.atualEpisode.id_episode ? 'Continuar' : 'Assistir'}
+                <button
+                  onClick={playAnime}>
+                  <FaPlay/>{anime.atualEpisode && anime.atualEpisode.id_episode ? 'Continuar' : 'Assistir'}
                 </button>
                 <button><FaPlus/>Adicionar a lista</button>
               </div>
@@ -237,7 +279,7 @@ export default function Description(props) {
 
       <div className='bodyDescription'>
 
-        {links.length > 0 && (
+        {!!playing.id && (
           <div className='player'>
             <ReactNetflixPlayer
               title={anime.nome}
@@ -246,15 +288,15 @@ export default function Description(props) {
               titleMedia={anime.nome}
               extraInfoMedia={episode.nome}
 
-              backButton={() => history.push('/info/' + anime.id)}
-              fullPlayer={false}
+              backButton={exitPlayer}
+              fullPlayer={true}
 
-              qualities={links}
+              qualities={episode.links}
               onChangeQuality={(id) => {
                 history.push('/info/' + anime.id + '/' + episode.id + '/' + id)
               }}
 
-              onCrossClick={() => history.push('/info/' + anime.id)}
+              onCrossClick={exitPlayer}
 
               src={playing.endereco}
               autoPlay={true}
@@ -267,35 +309,45 @@ export default function Description(props) {
               onNextClick={nextEpisode.id ? toNextVideo : false}
               onEnded={toNextVideo}
               onTimeUpdate={timeUpdate}
-              reprodutionList={episodes}
+              reprodutionList={anime.episodes}
             />
           </div>
         )}
 
-        <div className="episodes">
-          <div className='headerSession'>
-            <FiList/> <span>Episódios</span>
+        {!!anime.episodes && (
+
+          <div className="episodes">
+            <div className='headerSession'>
+              <FiList/> <span>Episódios</span>
+            </div>
+
+            <div className='listEpisodes'>
+              <ul ref={episodesList}>
+                <CarrosselComponent
+                  pageStart={lastEpisode.pageEpisodeAtual}
+                  sizeFull={(anime.episodes.length * 350) + (anime.episodes.length * 40)}
+                >
+                  {anime.episodes && anime.episodes.length > 0 && anime.episodes.map(episode => (
+                    <li
+                      onClick={episode.links && episode.links.length > 0 ? () => history.push('/info/' + anime.id + '/' + episode.id) : null}
+                      className={`itemEpisode ${episode.playing && "episodeSelected"}`}>
+                      <div className='imagem'>
+                        <img src={anime.imagem} alt=""/>
+                      </div>
+                      <div className='content'>
+                        <div>{episode.nome}</div>
+                        {(!episode.links || episode.links.length === 0) && (
+                          <p>Episódio temporariamente insdisponível</p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </CarrosselComponent>
+              </ul>
+            </div>
           </div>
-
-          <div className='listEpisodes'>
-            <ul ref={episodesList}>
-              {anime.episodes && anime.episodes.length > 0 && anime.episodes.map(episode => (
-                <li onClick={() => history.push('/info/' + anime.id + '/' + episode.id)}
-                    className={`itemEpisode ${episode.playing && "episodeSelected"}`}>
-                  <div className='imagem'>
-                    <img src={anime.imagem} alt=""/>
-                  </div>
-                  <div className='content'>{episode.nome}</div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-
+        )}
       </div>
-
-
     </div>
   );
 }

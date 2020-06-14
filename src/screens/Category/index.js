@@ -75,11 +75,9 @@ export default function Category(props) {
   }, [topCategorias]);
 
   return (
-    <div className='container-home'>
-      <NavBar {...props}/>
-      <div className="home">
+      <div className='bodyHome'>
 
-        <div className='box-item-home'>
+        <div className='boxItemHome'>
           <div className='header-session'>
             <FiStar/> <span>{seeAllCategorias ? 'Todas Categorias' : 'As Mais Vistas'}</span>
             {seeAllCategorias === true && (
@@ -116,8 +114,8 @@ export default function Category(props) {
           }
 
           return (
-            <div className='box-item-home'>
-              <div className='header-session'>
+            <div className='boxItemHome'>
+              <div className='headerSession'>
                 <FiPackage/> <span>{categoria.categoria}</span>
               </div>
 
@@ -132,7 +130,6 @@ export default function Category(props) {
         })}
 
       </div>
-    </div>
   );
 
 

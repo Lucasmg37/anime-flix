@@ -49,8 +49,10 @@ export default function Carrossel(props) {
                 {item.nome}
               </div>
               <div className='moreInformation'>
-                <span className='year'>2018</span>
-                <span className='myList'><RiPlayListAddLine/></span>
+                <span className='year'>{item.ano}</span>
+                <span className='myList'>
+                  {/*<RiPlayListAddLine/>*/}
+                </span>
                 <span className='stars'><FaStar/>7.8</span>
               </div>
             </div>
