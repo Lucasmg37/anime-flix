@@ -1,8 +1,8 @@
 import axios from "axios";
-import api from "config/config";
+
 
 const ApiService = axios.create({
-    baseURL: api
+    baseURL: process.env.REACT_APP_API
 });
 
 ApiService.interceptors.request.use(async (config) => {
