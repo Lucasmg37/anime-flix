@@ -17,6 +17,7 @@ export default function Private(props) {
   const [menuTopScroll, setMenuTopScroll] = useState(false);
 
   useEffect(() => {
+    setMenuTopScroll(false);
     window.addEventListener('scroll', scrollAction)
 
     Api.UserService.getUser().then(resonse => {
@@ -53,12 +54,9 @@ export default function Private(props) {
           )}/>
 
           <Route path="/search" exact render={({match}) => (
-            <Search {...props} match={match} usuario={usuario}/>
+            <Search {...props} setMenuTopScroll={setMenuTopScroll} match={match} usuario={usuario}/>
           )}/>
 
-          <Route path="/search/:categorias" render={({match}) => (
-            <Search {...props} match={match} usuario={usuario}/>
-          )}/>
 
           <Route path="/"
                  exact

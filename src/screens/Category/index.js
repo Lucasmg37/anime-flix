@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './styles.scss';
-import NavBar from "../../components/NavBar";
 import Api from "../../services/Api";
 import {FiPackage, FiStar, FiArrowUp, FiArrowDown} from "react-icons/fi";
 import Carrossel from "../../components/Carrossel";
@@ -69,7 +68,6 @@ export default function Category(props) {
         });
       });
 
-      // getAnimesByCategoria(0, 10);
     }
 
   }, [topCategorias]);

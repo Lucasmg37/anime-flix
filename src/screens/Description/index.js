@@ -2,9 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import ReactNetflixPlayer from 'react-netflix-player';
 import './styles.scss';
 import Api from "../../services/Api";
-import {FiPlay, FiArrowLeft, FiLink, FiZapOff, FiFolderPlus, FiList} from 'react-icons/fi'
-import NavBar from "../../components/NavBar";
-import PlayerComponent from "../../components/PlayerComponent";
+import {FiList} from 'react-icons/fi'
+
 import {FaPlay, FaPlus, FaStar, FiTag} from "react-icons/all";
 import CarrosselComponent from "../../components/CarrosselComponent";
 import EpisodeService from "../../services/EpisodeService";
