@@ -69,32 +69,34 @@ export default function Login({history, ...props}) {
   return (
     <div className='container'>
 
-      <div className='fundo-login'>
-        <div className='imagens'>
-          <img src={background} alt="Imagem de Fundo"/>
-        </div>
+      <div className='fundoLogin'>
+        <img src={background} alt="Imagem de Fundo"/>
         <div className='sobre-imagens'/>
       </div>
 
       <div className="topBar">
-        <img src={logo}/>
+        <img src={logo} alt={"Logo AnimeFlix"}/>
       </div>
 
-      <div className='box-center'>
-        <div className='text-login'>
-
-          <img src={goku} className='imgPersonagem'/>
-
-          <div>
-            <h1>+ DE 3000</h1>
-            <h2>Animes esperam por você!</h2>
-            <p>Faça o seu login e curta o conteúdo.</p>
-          </div>
+      <div className='boxCenter'>
+        <div className='imgPersonagemContainer'>
+          <img className={"floatCharacter"} src={goku} alt={"Goku voando"}/>
         </div>
 
         {props.location.pathname.indexOf('/login') >= 0 && (
           <form onSubmit={loginUser}>
-            <div>
+
+            <div className={"infoLogin"}>
+              <h1>
+                <span>+ </span>
+                <span>DE </span>
+                <span> 3000</span>
+              </h1>
+              <h2>Animes esperam <br/> por você!</h2>
+              <p>Faça o seu login e curta o conteúdo. 🎉</p>
+            </div>
+
+            <div className={"formGroupLogin"}>
               <UIinputText
                 placeholder='E-mail'
                 type='email'
@@ -110,7 +112,7 @@ export default function Login({history, ...props}) {
               />
               <UIbutton>ACESSAR</UIbutton>
 
-              <div className='criar-conta'>
+              <div className='createAccount'>
                 <a onClick={() => history.push('/signup')}>Criar uma conta</a> <FiArrowRight/>
               </div>
 
