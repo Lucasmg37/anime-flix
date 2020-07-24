@@ -120,12 +120,12 @@
   }
 }
 
-.formGroupLogin {
+.formGroupLogin, .formGroupSignOut {
   margin-top: 30px;
   opacity: 0;
   animation: fadeInUp 1s ease-out forwards;
 
-  .createAccount {
+  .createAccount, .loginUser {
     color: #ddd;
     opacity: .7;
     text-align: center;

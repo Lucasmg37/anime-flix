@@ -81,4 +81,21 @@
     box-shadow: 0 5px 15px rgba(0,0,0,.1);
   }
 
+  &.blocked {
+    cursor: not-allowed;
+  }
+
+  .loadingButton {
+    animation: 1s rotate linear infinite;
+  }
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

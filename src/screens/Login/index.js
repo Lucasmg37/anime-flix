@@ -1,70 +1,95 @@
 import React, {useEffect, useState} from 'react';
-import './styles.scss';
+import {FiArrowLeft, FiArrowRight} from "react-icons/fi";
+
+import Alert from "../../components/Alert";
 import UIinputText from "../../components/UIinputText";
 import UIbutton from "../../components/UIbutton";
-import Api from "../../services/Api";
-import {FiArrowLeft, FiArrowRight} from "react-icons/fi";
+
 import background from "../../assets/images/skyanime.jpg";
 import goku from "../../assets/images/goku.png";
 import logo from "../../assets/images/animeflix.svg";
 
-export default function Login({history, ...props}) {
+import Api from "../../services/Api";
 
-  const [usuario, setUsuario] = useState({});
+import './styles.scss';
 
-  const loginUser = e => {
+export default function Login({history, location}) {
+
+  const [user, setUser] = useState({});
+  const [error, setError] = useState("");
+  const [createSuccess, setCreateSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  /**
+   * Login user
+   * @param e
+   * @returns {Promise<void>}
+   */
+  const loginUser = async e => {
     e.preventDefault();
-    Api.LoginService.login(usuario.email, usuario.senha).then(response => {
+    try {
+      setLoading(true);
+      setError("");
+      const response = await Api.LoginService.login(user.email, user.password);
       localStorage.setItem('token', response.data.token);
-
-      let uri = window.location.hash;
-      uri = uri.substr(1);
-
-      if (uri) {
-        history.push(uri);
-        return;
-      }
-
-      history.push("/");
-
-    })
+      redirectUser();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const signUpUser = e => {
-    e.preventDefault();
+  /**
+   * Send user to last page visited or home page
+   */
+  const redirectUser = () => {
+    let uri = window.location.hash;
+    uri = uri.substr(1);
+    if (uri) {
+      history.push(uri);
+      return;
+    }
+    history.push("/");
+  }
 
-    if (usuario.senha !== usuario.confirmsenha) {
-      alert("Senhas se diferem entre si.");
+  /**
+   * Create New User
+   * @param e
+   * @returns {Promise<void>}
+   */
+  const signUpUser = async e => {
+    e.preventDefault();
+    setError("");
+
+    if (user.password !== user.confirmPassword) {
+      setError("As senhas não são iguais.");
       return;
     }
 
-    Api.SignUpService.signUp(
-      usuario.email, usuario.senha, usuario.nome
-    ).then(() => history.push('/login'));
-
+    try {
+      setLoading(true);
+      const response = await Api.SignUpService.signUp(user.email, user.password, user.name);
+      setCreateSuccess(user.email)
+      history.push('/login');
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     let token = localStorage.getItem('token');
-
     if (token) {
-      let uri = window.location.hash;
-      uri = uri.substr(1);
-
-      if (uri) {
-        history.push(uri);
-        return;
-      }
-      history.push("/");
+      redirectUser()
     }
-
   }, []);
 
-  const setItem = (value, atrr) => {
-    let object = usuario;
-    object[atrr] = value;
-    setUsuario({...usuario, ...object});
-  };
+  useEffect(() => {
+    setError("");
+    setUser({email: createSuccess});
+  }, [location.pathname])
 
   return (
     <div className='container'>
@@ -83,7 +108,7 @@ export default function Login({history, ...props}) {
           <img className={"floatCharacter"} src={goku} alt={"Goku voando"}/>
         </div>
 
-        {props.location.pathname.indexOf('/login') >= 0 && (
+        {location.pathname.indexOf('/login') >= 0 && (
           <form onSubmit={loginUser}>
 
             <div className={"infoLogin"}>
@@ -97,20 +122,37 @@ export default function Login({history, ...props}) {
             </div>
 
             <div className={"formGroupLogin"}>
+
+              {!!error && (
+                <Alert
+                  emoji={"😥"}
+                  message={error}
+                />
+              )}
+
+              {!!createSuccess && !error && (
+                <Alert
+                  emoji={"😎"}
+                  message={`Conta criada com sucesso!`}
+                />
+              )}
+
               <UIinputText
                 placeholder='E-mail'
                 type='email'
-                onChange={(value) => setItem(value, 'email')}
+                onChange={email => setUser({...user, email})}
                 required={true}
+                value={user.email}
               />
 
               <UIinputText
                 placeholder='Senha'
                 type='password'
-                onChange={(value) => setItem(value, 'senha')}
+                onChange={password => setUser({...user, password})}
                 required={true}
               />
-              <UIbutton>ACESSAR</UIbutton>
+
+              <UIbutton loading={loading}>ACESSAR</UIbutton>
 
               <div className='createAccount'>
                 <a onClick={() => history.push('/signup')}>Criar uma conta</a> <FiArrowRight/>
@@ -120,26 +162,41 @@ export default function Login({history, ...props}) {
           </form>
         )}
 
-        {props.location.pathname === '/signup' && (
+        {location.pathname === '/signup' && (
           <form onSubmit={signUpUser}>
-            <div>
+
+            <div className={"infoLogin"}>
+              <h2>Um email, uma senha e um nome!</h2>
+              <p>Cadastre-se para ter acesso <br/> ao conteúdo. 🎉</p>
+            </div>
+
+            <div className="formGroupSignOut">
+
+              {!!error && (
+                <Alert
+                  emoji={"😥"}
+                  message={error}
+                />
+              )}
+
+
               <UIinputText
                 placeholder='E-mail'
                 type='email'
-                onChange={(value) => setItem(value, 'email')}
+                onChange={email => setUser({...user, email})}
                 required={true}
               />
 
               <UIinputText
                 placeholder='Nome'
-                onChange={(value) => setItem(value, 'nome')}
+                onChange={name => setUser({...user, name})}
                 required={true}
               />
 
               <UIinputText
                 placeholder='Senha'
                 type='password'
-                onChange={(value) => setItem(value, 'senha')}
+                onChange={password => setUser({...user, password})}
                 required={true}
               />
 
@@ -147,13 +204,13 @@ export default function Login({history, ...props}) {
                 placeholder='Confirmação de Senha'
                 type='password'
                 required={true}
-                onChange={(value) => setItem(value, 'confirmsenha')}
+                onChange={confirmPassword => setUser({...user, confirmPassword})}
               />
 
-              <UIbutton>CADASTRAR</UIbutton>
+              <UIbutton loading={loading}>CADASTRAR</UIbutton>
 
-              <div className='criar-conta'>
-                <FiArrowLeft/> <a onClick={() => history.goBack()}>Fazer login</a>
+              <div className='loginUser'>
+                <a onClick={() => history.goBack()}>Fazer login</a> <FiArrowLeft/>
               </div>
 
             </div>

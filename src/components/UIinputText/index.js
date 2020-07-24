@@ -1,14 +1,15 @@
 import React from 'react';
 import 'sass/UI.scss';
 
-export default function UIinputText(props) {
+export default function UIinputText({className, onChange, type, value, placeholder, ...rest}) {
   return (
     <input
-      className={`UIinputText ${props.className}`}
-      placeholder={props.placeholder}
-      onChange={e => props.onChange(e.target.value)}
-      value={props.value}
-      type={props.type ? props.type : 'text'}
+      className={`UIinputText ${className}`}
+      placeholder={placeholder}
+      onChange={e => onChange(e.target.value)}
+      defaultValue={value}
+      type={type ? type : 'text'}
+      {...rest}
     />
   );
 }

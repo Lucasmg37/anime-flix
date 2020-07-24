@@ -1,0 +1,17 @@
+.containerAlert {
+  display: flex;
+  color: #ddd;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(34, 34, 34, 0.8);
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2em;
+
+  .icon {
+    margin-right: 8px;
+    font-size: 2em;
+  }
+}
