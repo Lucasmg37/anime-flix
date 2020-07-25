@@ -1,0 +1,23 @@
+.cardComponent {
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+
+  .headerSession {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 30px;
+
+    svg {
+      color: #d26e29;
+      font-size: 30px;
+      margin: auto 20px;
+    }
+  }
+
+}

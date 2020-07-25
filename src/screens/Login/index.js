@@ -179,7 +179,6 @@ export default function Login({history, location}) {
                 />
               )}
 
-
               <UIinputText
                 placeholder='E-mail'
                 type='email'

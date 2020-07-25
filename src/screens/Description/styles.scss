@@ -31,7 +31,6 @@
 
   .content {
     height: 70%;
-    width: 100%;
     z-index: 0;
     position: fixed;
     top: 0;
@@ -41,6 +40,7 @@
     justify-content: center;
     padding: 20px;
     color: #ffffff;
+    margin-top: 50px;
 
     .info {
       margin: auto auto auto 10%;
@@ -69,11 +69,9 @@
       }
 
       .title {
-        font-size: 5rem;
+        font-size: 3.5rem;
         font-weight: bold;
         margin: 10px auto;
-        //white-space: nowrap;
-        //overflow: hidden;
         text-overflow: ellipsis;
         animation: rightToLeftOpacity ease-out 1s;
         position: relative;

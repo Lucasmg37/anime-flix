@@ -20,7 +20,7 @@ ApiService.interceptors.response.use((response) => {
     return response.data;
 }, (error) => {
 
-    if (error.response.data.code && +error.response.data.code === 1001) {
+    if (error.response.data && error.response.data.code && +error.response.data.code === 1001) {
         localStorage.removeItem('token');
 
         let uri = window.location.pathname;

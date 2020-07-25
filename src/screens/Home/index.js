@@ -1,20 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import './styles.scss';
-import NavBar from "../../components/NavBar";
 import Api from "../../services/Api";
 import {
   FiPlay,
   FiPackage,
   FiList,
-  FiStar,
-  FiArchive,
-  FiArrowRight,
   FaStar,
   FiTag,
   FaPlay,
   FaPlus
 } from "react-icons/all";
 import Carrossel from "../../components/Carrossel";
+import SplashLoading from "../../components/SplashLoading";
+import Card from "../../components/Card";
+import Slider from "../../components/Slider";
 
 export default function Home(props) {
 
@@ -23,117 +22,110 @@ export default function Home(props) {
   const [newAnimesEp, setNewAnimesEp] = useState([]);
   const [recents, setRecents] = useState([]);
   const [top, setTop] = useState([]);
-  const [topCategorias, setTopCategorias] = useState([]);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    async function init() {
+      try {
+        setLoading(true);
 
-    Api.CategoriaService.getTopGlobal(10).then(response => {
-      setTopCategorias(response.data);
-    });
+        const responseNewAnimes = await Api.AnimeService.getNew();
+        setNewAnimes(responseNewAnimes.data);
 
-    Api.AnimeService.getNew().then(response => {
-      setNewAnimes(response.data);
-    });
+        const responseTopAnimes = await Api.AnimeService.getTop();
+        setTop(responseTopAnimes.data);
 
-    Api.AnimeService.getTop().then(response => {
-      setTop(response.data);
-    });
+        const responseRecents = await Api.AnimeService.getRecents();
+        setRecents(responseRecents.data);
 
-    Api.EpisodeService.getNew().then(response => {
-      setNewAnimesEp(response.data);
-    });
+        const responseNewEpisodes = await Api.EpisodeService.getNew();
+        setNewAnimesEp(responseNewEpisodes.data);
 
-    Api.AnimeService.getRecents().then(response => {
-      setRecents(response.data);
-    });
+      } catch (e) {
 
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    init();
   }, []);
 
 
   return (
-    <>
-      <div className='banner'>
-        <div className='fosco'/>
-        <video src={"http://lucasjunior.com.br/teste.mp4"} muted={true} autoPlay={true} controls={false} loop={true}/>
-        <div className='content'>
-          <div className='info'>
-            <div className='newEpisodes'><FiTag/> Novos Episódios</div>
-            <div className='infotop'>
-              <span className='star'><FaStar/>  7.2 </span>
-              <span>Ano <span className='destaque'>2001</span></span>
-              <span>Episódios <span className='destaque'>18</span></span>
+    <div className="containerHome">
+      <SplashLoading show={loading}/>
+
+      <Slider
+        className={"bannerHome"}
+        items={[
+          {
+            isVideo: true,
+            src: "http://lucasjunior.com.br/teste.mp4",
+            content: <div className='content'>
+              <div className='info'>
+                <div className='newEpisodes'><FiTag/> Novos Episódios</div>
+                <div className='infotop'>
+                  <span className='star'><FaStar/>  7.2 </span>
+                  <span>Ano <span className='destaque'>2001</span></span>
+                  <span>Episódios <span className='destaque'>18</span></span>
+                </div>
+                <div className='title'>Dragon Ball Z</div>
+                <div className='description'>
+                  Dragon Ball é uma franquia de mídia japonesa criada por Akira Toriyama. Originalmente iniciada com uma
+                  série de mangá que foi escrita e ilustrada por Toriyama, teve os seus capítulos serializados
+                </div>
+                <div className='buttonsBanner'>
+                  <button><FaPlay/>Assistir</button>
+                  <button><FaPlus/>Adicionar a lista</button>
+                </div>
+              </div>
+              <div className='controllBanner'>
+                <div>
+                  <div className='toBanner'/>
+                  <div className='toBanner'/>
+                  <div className='toBanner'/>
+                </div>
+              </div>
             </div>
-            <div className='title'>Dragon Ball Z</div>
-            <div className='description'>
-              Dragon Ball é uma franquia de mídia japonesa criada por Akira Toriyama. Originalmente iniciada com uma
-              série de mangá que foi escrita e ilustrada por Toriyama, teve os seus capítulos serializados
-            </div>
-            <div className='buttonsBanner'>
-              <button><FaPlay/>Assistir</button>
-              <button><FaPlus/>Adicionar a lista</button>
-            </div>
-          </div>
-          <div className='controllBanner'>
-            <div>
-              <div className='toBanner'/>
-              <div className='toBanner'/>
-              <div className='toBanner'/>
-            </div>
-          </div>
-        </div>
-      </div>
+          }
+        ]}
+      />
 
       <div className='bodyHome'>
-
-        <div className='boxItemHome'>
-          <div className='headerSession'>
-            <FaStar/> <span>Os mais vistos</span>
-          </div>
-
+        <Card icon={FaStar} title="Os mais vistos">
           <Carrossel
             itens={top}
             onClickItem={(value) => history.push('/info/' + value)}
           />
-        </div>
+        </Card>
 
         {recents.length > 0 && (
-          <div className='boxItemHome'>
-            <div className='headerSession'>
-              <FiPlay/> <span>Continuar Assistindo</span>
-            </div>
-
+          <Card icon={FiPlay} title="Continuar Assistindo">
             <Carrossel
               itens={recents}
               onClickItem={(value) => history.push('/info/' + value)}
             />
-          </div>
+          </Card>
         )}
 
-        <div className='boxItemHome'>
-          <div className='headerSession'>
-            <FiPackage/> <span>Acabaram de chegar</span>
-          </div>
-
+        <Card icon={FiPackage} title="Acabaram de chegar">
           <Carrossel
             itens={newAnimes}
             onClickItem={(value) => history.push('/info/' + value)}
           />
-        </div>
+        </Card>
 
-        <div className='boxItemHome'>
-          <div className='headerSession'>
-            <FiList/> <span>Novos Episódios</span>
-          </div>
-
+        <Card icon={FiList} title="Novos Episódios">
           <Carrossel
             itens={newAnimesEp}
             onClickItem={(value) => history.push('/info/' + value)}
           />
-        </div>
-
+        </Card>
 
       </div>
-    </>
+    </div>
   );
 
 

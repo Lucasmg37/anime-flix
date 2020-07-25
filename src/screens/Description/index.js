@@ -221,7 +221,7 @@ export default function Description({match, history}) {
       animeSend = await getAnime();
     }
 
-    // Se alterar o anime
+    // Se alterar o Episode
     if (match.params.episode) {
       episodeSend = await changeEpisode(animeSend);
     }
@@ -251,7 +251,7 @@ export default function Description({match, history}) {
           <div className='content'>
             <div className='info'>
               <div className='infotop'>
-                <span className='star'><FaStar/>  7.2 </span>
+                {/*<span className='star'><FaStar/>  7.2 </span>*/}
                 <span>Ano <span className='destaque'>{anime.ano}</span></span>
                 <span>Episódios <span className='destaque'>{anime.episodes ? anime.episodes.length : 0}</span></span>
               </div>
